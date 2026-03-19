@@ -1,0 +1,20 @@
+<launch>
+  <!-- Launch file for velodyne16 VLP-16 LiDAR -->
+
+    <arg name="rviz" default="true" />
+    <arg name="seq" default="V2" />
+    <arg name="ground_truth_map_path" default="$(find mr_voxel_svio)/prior_voxel_lidar_map/Euroc/$(arg seq)" />
+    <arg name="ground_truth_pose_path" default="$(find mr_voxel_svio)/GT-Pose/Euroc-gt/V2_01_easy.txt" />
+
+    <rosparam command="load" file="$(find mr_voxel_svio)/config/euroc.yaml" />
+
+    <param name="output_path" type="string" value="$(find mr_voxel_svio)/output"/>
+    <param name="ground_truth_map/map_path" type="string" value="$(arg ground_truth_map_path)"/>
+    <param name="ground_truth_map/pose_path" type="string" value="$(arg ground_truth_pose_path)"/>
+    <node pkg="mr_voxel_svio" type="vio_node" name="vio_node" output="screen" /> 
+
+    <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find mr_voxel_svio)/rviz_cfg/euroc.rviz" />
+    </group>
+
+</launch>

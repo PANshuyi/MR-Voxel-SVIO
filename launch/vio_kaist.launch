@@ -1,0 +1,22 @@
+<launch>
+  <!-- Launch file for velodyne16 VLP-16 LiDAR -->
+
+    <arg name="rviz" default="true" />
+    <arg name="seq" default="urban39" />
+    <arg name="use_new" default="true" />
+    <arg name="ground_truth_map_path" default="$(find mr_voxel_svio)/prior_voxel_lidar_map/Urban/$(arg seq)" />
+    <arg name="ground_truth_pose_path" default="$(find mr_voxel_svio)/GT-Pose/Urban-gt/urban39_IMU.txt" />
+
+    <rosparam command="load" file="$(find mr_voxel_svio)/config/kaist2.yaml" />
+
+    <param name="output_path" type="string" value="$(find mr_voxel_svio)/output"/>
+    <param name="use_new" type="bool" value="$(eval false if arg('seq') == 'urban28' else (arg('use_new') == 'true'))"/>
+    <param name="ground_truth_map/map_path" type="string" value="$(arg ground_truth_map_path)"/>
+    <param name="ground_truth_map/pose_path" type="string" value="$(arg ground_truth_pose_path)"/>
+    <node pkg="mr_voxel_svio" type="vio_node" name="vio_node" output="screen" /> 
+
+    <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find mr_voxel_svio)/rviz_cfg/kaist.rviz" />
+    </group>
+
+</launch>
