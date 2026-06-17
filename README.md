@@ -20,8 +20,6 @@ Key ideas:
 ---
 Please kindly star ⭐️ this project if it helps you. We take great efforts to develop and maintain it 😁.
 
-##  Developers:
-The codes of this repo are contributed by:[Shuyi Pan](https://github.com/PANshuyi), [Zikang Yuan](https://github.com/ZikangYuan).
 
 ## 🛠️ Installation
 
